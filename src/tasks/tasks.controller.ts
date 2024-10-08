@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -8,6 +9,7 @@ import {
   Post,
   Query,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
@@ -20,6 +22,7 @@ import { Task } from './task.entity';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
+@UseInterceptors(ClassSerializerInterceptor)
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
