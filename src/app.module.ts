@@ -5,10 +5,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
 import { AuthModule } from './auth/auth.module';
+import { configValidationSchema } from 'config.schema';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: `.env.stage.${process.env.STAGE}` }),
+    ConfigModule.forRoot({
+      envFilePath: `.env.stage.${process.env.STAGE}`,
+      validationSchema: configValidationSchema,
+    }),
     TasksModule,
     AuthModule,
     TypeOrmModule.forRootAsync({
